@@ -982,18 +982,27 @@
     showPopup('popup1b');
   });
 
+  var fones = {
+    'Centro (24/6/2026)':   '554832231717',
+    'Jurerê (1/7/2026)':    '554832821440',
+    'Primavera (1/7/2026)': '5548991766548'
+  };
+
   function selectUnit(unidade) {
     formData.unidadeEscolhida = unidade;
-    // SUBSTITUA pelo número real da escola (somente dígitos, com DDI)
-    const numero = '5548999999999';
-    const msg = encodeURIComponent(
+    var numero = fones[unidade] || '5548999999999';
+    var msg = encodeURIComponent(
       'Olá! Quero finalizar minha inscrição no Pure Baby Experience.\n\n' +
       'Nome: ' + formData.nome + '\n' +
       'Unidade: ' + unidade + '\n' +
       'E-mail: ' + formData.email + '\n' +
       'Telefone: ' + formData.telefone
     );
-    document.getElementById('btnWhatsapp').href = 'https://wa.me/' + numero + '?text=' + msg;
+    var btn = document.getElementById('btnWhatsapp');
+    btn.href = 'https://wa.me/' + numero + '?text=' + msg;
+    btn.onclick = function () {
+      fbq('track', 'QualifiedLead', { content_name: unidade });
+    };
     showPopup('popup3');
   }
 
