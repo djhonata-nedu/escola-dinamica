@@ -1156,13 +1156,12 @@
 
     formData = { nome: fname + ' ' + lname, email, telefone: tel, unidade };
 
-    // ── INTEGRAÇÃO CRM ────────────────────────────────────
-    // fetch('https://SEU_ENDPOINT', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(formData)
-    // });
-    // ─────────────────────────────────────────────────────
+    fetch('https://script.google.com/macros/s/AKfycbxgeyh58yJjU3KdRSym8GODTD5HMcowljgUkVIRHUC48eGqfJcTdqFu0vYZrDRnqkkazg/exec', {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(formData)
+    });
 
     showPopup('popup1');
   });
