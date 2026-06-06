@@ -1205,8 +1205,13 @@
     );
     var btn = document.getElementById('btnWhatsapp');
     btn.href = `https://wa.me/${numero}?text=${msg}`;
+    var eventNames = {
+      'Centro (24/6/2026)':   'QualifiedLead Centro',
+      'Jurerê (1/7/2026)':    'QualifiedLead Jurere',
+      'Primavera (1/7/2026)': 'QualifiedLead Primavera'
+    };
     btn.onclick = function () {
-      fbq('track', 'QualifiedLead', { content_name: unidade });
+      fbq('trackCustom', eventNames[unidade] || 'QualifiedLead');
     };
     showPopup('popup3');
   }
