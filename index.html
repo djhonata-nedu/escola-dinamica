@@ -1,0 +1,1204 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pure Baby Experience – Dinâmica Bilingual School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #1a45c0;
+      --blue-dark: #0f2d8c;
+      --yellow:    #ffc400;
+      --orange:    #f07030;
+      --white:     #ffffff;
+      --off-white: #fafaf8;
+      --gray-light:#f0f2f8;
+      --gray-mid:  #dde0ea;
+      --text:      #1a1a2e;
+      --text-muted:#5a6275;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--blue);
+      padding: 14px 40px;
+      display: flex;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-decoration: none;
+    }
+
+    .logo-img {
+      height: 44px;
+      width: auto;
+      object-fit: contain;
+      border-radius: 8px;
+      background: white;
+      padding: 3px 6px;
+      flex-shrink: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--blue);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 0;
+    }
+
+    .hero-content {
+      max-width: 700px;
+      padding-bottom: 72px;
+      color: var(--white);
+    }
+
+    /* ── SECTION TRANSITION ── */
+    .section-transition {
+      height: 7px;
+      width: 100%;
+      background: linear-gradient(to right,
+        #f5a0b8 0% 16.67%,
+        #f5cfa0 16.67% 33.33%,
+        #d4f0a0 33.33% 50%,
+        #a0f0d0 50% 66.67%,
+        #a0c8f5 66.67% 83.33%,
+        #c4a0f5 83.33% 100%
+      );
+      flex-shrink: 0;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .hero-tagline {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      opacity: 0.9;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--yellow);
+      margin-bottom: 28px;
+      font-weight: 400;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-meta-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 0.92rem;
+      opacity: 0.92;
+    }
+
+    .hero-meta-item svg { flex-shrink: 0; }
+
+    .hero-cta {
+      margin-top: 32px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      padding: 14px 30px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 18px rgba(240,112,48,0.4);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { background: #d45e22; transform: translateY(-2px); }
+
+    /* ── MAIN LAYOUT ── */
+    .main-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 64px 24px 80px;
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* ── LEFT CONTENT ── */
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    .content-block h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 6px;
+      color: var(--blue);
+    }
+
+    .content-block h2 em {
+      font-style: italic;
+      color: var(--orange);
+    }
+
+    .accent-bar {
+      width: 48px;
+      height: 4px;
+      border-radius: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--orange));
+      margin: 16px 0 24px;
+    }
+
+    .lead-text {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .lead-text strong { color: var(--text); font-weight: 600; }
+
+    /* ── ITINERARY ── */
+    .itinerary-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 32px 0 16px;
+      letter-spacing: 0.01em;
+    }
+
+    .itinerary {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .itinerary li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--gray-mid);
+    }
+
+    .itinerary li:first-child { border-top: 1px solid var(--gray-mid); }
+
+    .it-left {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      min-width: 68px;
+    }
+
+    .it-time {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--blue);
+      background: #eef1fb;
+      border-radius: 6px;
+      padding: 3px 7px;
+      white-space: nowrap;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .it-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    .it-body strong {
+      display: block;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+    }
+
+    .it-body p {
+      font-size: 0.83rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* ── BLOCOS ── */
+    .blocks-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px 72px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+    }
+
+    .block-card {
+      border-radius: 16px;
+      padding: 32px 28px;
+    }
+
+    .block-card.blue-card {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .block-card.light-card {
+      background: var(--gray-light);
+    }
+
+    .block-card h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .block-card.light-card h3 {
+      border-bottom-color: var(--gray-mid);
+      color: var(--blue);
+    }
+
+    .block-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .block-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+
+    .block-card.blue-card .block-list li { color: rgba(255,255,255,0.9); }
+    .block-card.light-card .block-list li { color: var(--text-muted); }
+
+    .block-icon {
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    .blue-card .block-icon { background: var(--yellow); color: var(--blue-dark); }
+    .light-card .block-icon { background: var(--blue); color: var(--white); }
+
+    /* ── FORM CARD ── */
+    .form-card {
+      background: var(--white);
+      border-radius: 18px;
+      box-shadow: 0 6px 40px rgba(26,69,192,0.13), 0 1px 6px rgba(0,0,0,0.05);
+      overflow: hidden;
+      position: sticky;
+      top: 80px;
+    }
+
+    .form-header {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
+      color: var(--white);
+      padding: 26px 28px 22px;
+    }
+
+    .form-header .section-label { color: var(--yellow); margin-bottom: 6px; }
+
+    .form-header h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .form-header p { font-size: 0.8rem; opacity: 0.72; }
+
+    .spots-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-top: 14px;
+      font-size: 0.78rem;
+    }
+
+    .spots-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--yellow);
+      flex-shrink: 0;
+      animation: blink 1.6s infinite;
+    }
+
+    @keyframes blink {
+      0%,100% { opacity:1; transform:scale(1); }
+      50% { opacity:0.5; transform:scale(1.4); }
+    }
+
+    form {
+      padding: 22px 26px 26px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .field { display: flex; flex-direction: column; gap: 5px; }
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+    label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    label .req { color: var(--orange); }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--gray-mid);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,69,192,0.1);
+    }
+
+    input::placeholder { color: #b8bcc8; }
+
+    select {
+      width: 100%;
+      padding: 10px 13px;
+      border: 1.5px solid var(--gray-mid);
+      border-radius: 8px;
+      font-size: 0.88rem;
+      font-family: inherit;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235a6275' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(26,69,192,0.1);
+    }
+
+    /* ── POPUP ── */
+    .popup-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 60, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .popup-overlay.active { display: flex; }
+
+    .popup {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 36px;
+      max-width: 420px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+      animation: popIn 0.25s cubic-bezier(0.34,1.56,0.64,1);
+    }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.88) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .popup-emoji {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .popup h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .popup p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      margin-bottom: 24px;
+    }
+
+    .popup-actions {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
+    .btn-popup-confirm {
+      flex: 1;
+      padding: 12px 20px;
+      background: var(--blue);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-popup-confirm:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+    .btn-popup-deny {
+      flex: 1;
+      padding: 12px 20px;
+      background: var(--gray-light);
+      color: var(--text-muted);
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-popup-deny:hover { background: var(--gray-mid); }
+
+    .unit-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-unit {
+      width: 100%;
+      padding: 14px 20px;
+      background: var(--gray-light);
+      color: var(--text);
+      border: 2px solid var(--gray-mid);
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.18s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-unit::before {
+      content: '';
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--gray-mid);
+      flex-shrink: 0;
+      transition: background 0.18s;
+    }
+
+    .btn-unit:hover {
+      border-color: var(--blue);
+      background: #eef1fb;
+      color: var(--blue);
+    }
+
+    .btn-unit:hover::before { background: var(--blue); }
+
+    .unit-date {
+      margin-left: auto;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-muted);
+    }
+
+    .btn-unit:hover .unit-date { color: var(--blue); opacity: 0.75; }
+
+    .btn-whatsapp {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px 20px;
+      background: #25d366;
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(37,211,102,0.35);
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-whatsapp:hover { background: #1db954; transform: translateY(-1px); }
+
+    .btn-instagram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      width: 100%;
+      padding: 13px 20px;
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: var(--white);
+      border: none;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-instagram:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* radio groups */
+    .radio-group-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .radio-option {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .radio-option input[type="radio"] {
+      display: none;
+    }
+
+    .radio-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 14px;
+      border: 1.5px solid var(--gray-mid);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      background: var(--white);
+      cursor: pointer;
+      transition: all 0.18s;
+      white-space: nowrap;
+    }
+
+    .radio-option input[type="radio"]:checked + .radio-btn {
+      border-color: var(--blue);
+      background: #eef1fb;
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .radio-btn::before {
+      content: '';
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      border: 1.5px solid var(--gray-mid);
+      flex-shrink: 0;
+      transition: all 0.18s;
+    }
+
+    .radio-option input[type="radio"]:checked + .radio-btn::before {
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .form-divider {
+      border: none;
+      border-top: 1px solid var(--gray-mid);
+      margin: 2px 0;
+    }
+
+    .family-label {
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 14px;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 0.95rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      letter-spacing: 0.02em;
+      box-shadow: 0 4px 16px rgba(240,112,48,0.35);
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+
+    .btn-submit:hover {
+      background: #d45e22;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 22px rgba(240,112,48,0.4);
+    }
+
+    .lgpd-note {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      text-align: center;
+    }
+
+    /* ── SUCCESS ── */
+    .success-msg {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 44px 28px;
+      gap: 14px;
+    }
+
+    .success-icon {
+      width: 60px; height: 60px;
+      border-radius: 50%;
+      background: #e8f5e9;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .success-msg h3 { font-size: 1.15rem; font-weight: 700; }
+
+    .success-msg p {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 36px 24px;
+      font-size: 0.8rem;
+      line-height: 1.8;
+    }
+
+    footer strong { color: var(--white); }
+    footer a { color: var(--yellow); text-decoration: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 860px) {
+      .main-wrap {
+        grid-template-columns: 1fr;
+        gap: 44px;
+        padding: 48px 20px 60px;
+      }
+
+      .blocks-section {
+        grid-template-columns: 1fr;
+        padding: 0 20px 56px;
+      }
+
+      .form-card { position: static; }
+
+      .hero-content { padding-bottom: 56px; }
+
+      header { padding: 14px 20px; }
+
+      .field-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <a href="#" class="logo-wrap">
+    <img src="logo/logo_novo.png" alt="Logo Dinâmica Bilingual School" class="logo-img" />
+  </a>
+  </a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="badge">&#127881; Evento Presencial · Exclusivo</span>
+    <p class="hero-tagline">Dinâmica Baby</p>
+    <h1 class="hero-title">Pure Baby Experience</h1>
+    <p class="hero-subtitle">Uma curadoria de estímulos</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        24 de junho &nbsp;ou&nbsp; 01 de julho de 2025
+      </div>
+      <div class="hero-meta-item">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Das 9h45 às 11h15
+      </div>
+      <div class="hero-meta-item">
+        <svg width="17" height="17" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+        Unidade Centro, Jurerê e Primavera
+      </div>
+    </div>
+    <div class="hero-cta">
+      <a href="#rsvp" class="btn-primary">Garantir minha vaga &#8594;</a>
+    </div>
+  </div>
+  <div class="section-transition"></div>
+</section>
+
+<!-- MAIN -->
+<div class="main-wrap" id="rsvp">
+
+  <!-- LEFT -->
+  <div class="content-block">
+    <p class="section-label">Sobre o evento</p>
+    <h2>O futuro começa<br /><em>before words</em></h2>
+    <div class="accent-bar"></div>
+
+    <p class="lead-text">
+      Você é nossa convidada para uma manhã no universo da <strong>Dinâmica Baby</strong>, em uma <strong>Pure Baby Experience</strong>. Queremos celebrar o início de uma jornada extraordinária.
+    </p>
+
+    <p class="lead-text">
+      Acreditamos que o desenvolvimento integral começa desde o início da vida por meio de diferentes estímulos emocional e cognitivo, que despertam para o mundo.
+    </p>
+
+    <p class="lead-text">
+      Por isso, muito mais do que uma visita, preparamos uma <strong>curadoria de estímulos</strong> para você e seu bebê. Da nota musical que acalma, ao movimento que coordena o amanhã!
+    </p>
+
+    <p class="lead-text">
+      Será um encontro muito especial para apresentarmos nosso espaço, nossos <strong>especialistas em primeira infância</strong> e para você sentir nossa Escola em movimento. Queremos te mostrar como a Dinâmica Baby transforma afeto e cuidado diário em uma <strong>jornada de descobertas felizes</strong>, preparando o caminho para uma <strong>vida inteira de aprendizado!</strong>
+    </p>
+
+    <p class="itinerary-title">The Journey Itinerary</p>
+    <ul class="itinerary">
+      <li>
+        <div class="it-left">
+          <span class="it-time">09h45<br/>às 10h</span>
+        </div>
+        <div class="it-body">
+          <strong>Welcome &amp; Juice</strong>
+          <p>Recepção especial para nossas famílias.</p>
+        </div>
+      </li>
+      <li>
+        <div class="it-left">
+          <span class="it-time">10h<br/>às 10h20</span>
+        </div>
+        <div class="it-body">
+          <strong>Guided Perspective</strong>
+          <p>Um olhar sobre nossos espaços e nossa proposta pedagógica, com a Coordenação Pedagógica.</p>
+        </div>
+      </li>
+      <li>
+        <div class="it-left">
+          <span class="it-time">10h20<br/>às 10h40</span>
+        </div>
+        <div class="it-body">
+          <strong>Sound &amp; Connection</strong>
+          <p>Vivência de Musicalização.</p>
+        </div>
+      </li>
+      <li>
+        <div class="it-left">
+          <span class="it-time">10h40<br/>às 11h</span>
+        </div>
+        <div class="it-body">
+          <strong>Movement &amp; Discovery</strong>
+          <p>Oficina de Psicomotricidade.</p>
+        </div>
+      </li>
+      <li>
+        <div class="it-left">
+          <span class="it-time">11h<br/>às 11h15</span>
+        </div>
+        <div class="it-body">
+          <strong>Beyond the Experience</strong>
+          <p>Agradecimentos e um convite para continuarmos construindo, juntos, esse caminho de descobertas.</p>
+        </div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="form-card">
+    <div class="form-header">
+      <p class="section-label">RSVP</p>
+      <h3>Reserve sua vaga gratuitamente</h3>
+      <p>Preencha seus dados e confirme presença</p>
+      <div class="spots-bar">
+        <div class="spots-dot"></div>
+        Vagas limitadas — não deixe para depois!
+      </div>
+    </div>
+
+    <form id="captureForm" novalidate>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="fname">Primeiro nome <span class="req">*</span></label>
+          <input type="text" id="fname" name="fname" placeholder="Seu nome" required />
+        </div>
+        <div class="field">
+          <label for="lname">Último sobrenome <span class="req">*</span></label>
+          <input type="text" id="lname" name="lname" placeholder="Sobrenome" required />
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="email">E-mail <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="seu@email.com" required />
+      </div>
+
+      <div class="field">
+        <label for="telefone">Telefone <span class="req">*</span></label>
+        <input type="tel" id="telefone" name="telefone" placeholder="(48) 9 0000-0000" required />
+      </div>
+
+      <div class="field">
+        <label for="unidade">Evento de interesse <span class="req">*</span></label>
+        <select id="unidade" name="unidade" required>
+          <option value="" disabled selected>Selecione um evento</option>
+          <option value="Centro (24/6/2026)">Centro (24/6/2026)</option>
+          <option value="Jurerê (1/7/2026)">Jurerê (1/7/2026)</option>
+          <option value="Primavera (1/7/2026)">Primavera (1/7/2026)</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn-submit">Quero garantir minha vaga &#8594;</button>
+
+      <p class="lgpd-note">
+        Os dados pessoais coletados serão utilizados para viabilizar a inscrição e para o envio de comunicações de marketing. A Dinâmica realiza o tratamento de dados pessoais de acordo com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018) e demais leis aplicáveis.
+      </p>
+
+    </form>
+
+    <div class="success-msg" id="successMsg">
+      <div class="success-icon">
+        <svg width="28" height="28" fill="none" viewBox="0 0 24 24" stroke="#2e7d32" stroke-width="2.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+        </svg>
+      </div>
+      <h3>Inscrição confirmada!</h3>
+      <p>
+        Que alegria ter você com a gente!<br /><br />
+        Em breve você receberá um e-mail com todos os detalhes. Qualquer dúvida, fale com a gente pelo WhatsApp.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- BLOCOS -->
+<div class="blocks-section">
+
+  <div class="block-card blue-card">
+    <h3>O que você vai viver</h3>
+    <ul class="block-list">
+      <li>
+        <span class="block-icon">✦</span>
+        Welcome &amp; Juice
+      </li>
+      <li>
+        <span class="block-icon">✦</span>
+        Tour pelos espaços
+      </li>
+      <li>
+        <span class="block-icon">✦</span>
+        Vivência de Musicalização
+      </li>
+      <li>
+        <span class="block-icon">✦</span>
+        Oficina de Psicomotricidade
+      </li>
+      <li>
+        <span class="block-icon">✦</span>
+        Conversa com especialistas em primeira infância
+      </li>
+    </ul>
+  </div>
+
+  <div class="block-card light-card">
+    <h3>Sobre a Dinâmica Baby</h3>
+    <ul class="block-list">
+      <li>
+        <span class="block-icon">&#10003;</span>
+        Especialistas em primeira infância
+      </li>
+      <li>
+        <span class="block-icon">&#10003;</span>
+        Ambientes preparados para estímulos sensoriais
+      </li>
+      <li>
+        <span class="block-icon">&#10003;</span>
+        Proposta pedagógica humanizada
+      </li>
+      <li>
+        <span class="block-icon">&#10003;</span>
+        Desenvolvimento emocional, motor e cognitivo
+      </li>
+      <li>
+        <span class="block-icon">&#10003;</span>
+        Acolhimento às famílias
+      </li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- POPUPS -->
+<div class="popup-overlay" id="popupOverlay">
+
+  <!-- 1: Confirmação de idade -->
+  <div class="popup" id="popup1">
+    <span class="popup-emoji">👶</span>
+    <h3>Evento exclusivo</h3>
+    <p>Este evento é exclusivo para crianças entre <strong>6 meses e 1 ano e meio</strong>.<br />Seu bebê está nessa faixa?</p>
+    <div class="popup-actions">
+      <button class="btn-popup-confirm" id="btnConfirm">Sim, confirmo</button>
+      <button class="btn-popup-deny" id="btnDeny">Não</button>
+    </div>
+  </div>
+
+  <!-- 1b: Rejeição de idade -->
+  <div class="popup" id="popup1b" style="display:none">
+    <span class="popup-emoji">💙</span>
+    <h3>Obrigado pelo interesse!</h3>
+    <p>Este evento é exclusivo para maternal.<br />Fique atento nos próximos eventos — temos novidades para todas as idades!</p>
+    <a href="https://instagram.com/dinamicabilingual" target="_blank" class="btn-instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+      Ver no Instagram
+    </a>
+  </div>
+
+  <!-- 2: Escolha de unidade -->
+  <div class="popup" id="popup2" style="display:none">
+    <span class="popup-emoji">📍</span>
+    <h3>Que unidade é ideal para você?</h3>
+    <p>Escolha a unidade mais conveniente para a sua família.</p>
+    <div class="unit-grid">
+      <button class="btn-unit" onclick="selectUnit('Centro (24/6/2026)')">Centro <span class="unit-date">24/6/2026</span></button>
+      <button class="btn-unit" onclick="selectUnit('Jurerê (1/7/2026)')">Jurerê <span class="unit-date">1/7/2026</span></button>
+      <button class="btn-unit" onclick="selectUnit('Primavera (1/7/2026)')">Primavera <span class="unit-date">1/7/2026</span></button>
+    </div>
+  </div>
+
+  <!-- 3: WhatsApp -->
+  <div class="popup" id="popup3" style="display:none">
+    <span class="popup-emoji">🎉</span>
+    <h3>Quase lá!</h3>
+    <p>Finalize a sua inscrição no nosso WhatsApp. É rapidinho!</p>
+    <a id="btnWhatsapp" href="#" target="_blank" class="btn-whatsapp">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Continuar no WhatsApp
+    </a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Dinâmica Bilingual School</strong><br />
+  Unidade Centro · Rua Alves de Brito, 236 – Florianópolis, SC<br /><br />
+  &copy; 2025 Dinâmica Bilingual School. Todos os direitos reservados.
+</footer>
+
+<script>
+  // Smooth scroll
+  document.querySelectorAll('a[href="#rsvp"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      document.getElementById('rsvp').scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  // Máscara telefone
+  document.getElementById('telefone').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d*)$/, '($1) $2');
+    this.value = v;
+  });
+
+  // ── Dados coletados do formulário (usados nos popups) ──
+  let formData = {};
+
+  // ── Helpers de popup ──
+  function showPopup(id) {
+    ['popup1','popup1b','popup2','popup3'].forEach(p => {
+      document.getElementById(p).style.display = 'none';
+    });
+    document.getElementById(id).style.display = 'block';
+    document.getElementById('popupOverlay').classList.add('active');
+  }
+
+  function closeOverlay() {
+    document.getElementById('popupOverlay').classList.remove('active');
+  }
+
+  // ── Submit do formulário → Popup 1 ──
+  document.getElementById('captureForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const fname   = document.getElementById('fname').value.trim();
+    const lname   = document.getElementById('lname').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const tel     = document.getElementById('telefone').value.trim();
+    const unidade = document.getElementById('unidade').value;
+
+    if (!fname || !email || !tel || !unidade) {
+      alert('Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+
+    formData = { nome: fname + ' ' + lname, email, telefone: tel, unidade };
+
+    // ── INTEGRAÇÃO CRM ────────────────────────────────────
+    // fetch('https://SEU_ENDPOINT', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body: JSON.stringify(formData)
+    // });
+    // ─────────────────────────────────────────────────────
+
+    showPopup('popup1');
+  });
+
+  // ── Popup 1: Confirma idade → Popup 2 ──
+  document.getElementById('btnConfirm').addEventListener('click', function () {
+    showPopup('popup2');
+  });
+
+  // ── Popup 1: Nega idade → Mensagem de rejeição ──
+  document.getElementById('btnDeny').addEventListener('click', function () {
+    showPopup('popup1b');
+  });
+
+  // ── Popup 2: Escolha de unidade → Popup 3 ──
+  function selectUnit(unidade) {
+    formData.unidadeEscolhida = unidade;
+
+    // Monta link WhatsApp com mensagem pré-preenchida
+    // SUBSTITUA o número abaixo pelo número real da escola
+    const numero = '5548999999999';
+    const msg = encodeURIComponent(
+      `Olá! Quero finalizar minha inscrição no Pure Baby Experience.\n\nNome: ${formData.nome}\nUnidade: ${unidade}\nE-mail: ${formData.email}\nTelefone: ${formData.telefone}`
+    );
+    document.getElementById('btnWhatsapp').href = `https://wa.me/${numero}?text=${msg}`;
+
+    showPopup('popup3');
+  }
+
+  // Fechar overlay clicando fora do popup (exceto popup3)
+  document.getElementById('popupOverlay').addEventListener('click', function (e) {
+    if (e.target === this) {
+      const p3 = document.getElementById('popup3');
+      if (p3.style.display !== 'block') closeOverlay();
+    }
+  });
+</script>
+</body>
+</html>
