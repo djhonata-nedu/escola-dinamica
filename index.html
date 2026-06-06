@@ -827,7 +827,7 @@
 <!-- HEADER -->
 <header>
   <a href="#" class="logo-wrap">
-    <img src="logo/logo_novo.png" alt="Logo Dinâmica Bilingual School" class="logo-img" />
+    <img src="logo/logo_novo.png" alt="Logo Dinâmica Bilingual School" class="logo-img" loading="lazy" />
   </a>
   </a>
 </header>
@@ -933,6 +933,13 @@
         </div>
       </li>
     </ul>
+
+    <div style="text-align:center; margin-top:36px;">
+      <a href="#rsvp" class="btn-primary" onclick="event.preventDefault();document.getElementById('rsvp').scrollIntoView({behavior:'smooth'});">
+        Quero garantir minha vaga &#8594;
+      </a>
+      <p style="margin-top:10px;font-size:0.78rem;color:var(--text-muted);">Apenas 6 vagas por unidade · Inscrição gratuita</p>
+    </div>
   </div>
 
   <!-- RIGHT: FORM -->
@@ -943,21 +950,15 @@
       <p>Preencha seus dados e confirme presença</p>
       <div class="spots-bar">
         <div class="spots-dot"></div>
-        Vagas limitadas — não deixe para depois!
+        Apenas 6 vagas por unidade — garante já a sua!
       </div>
     </div>
 
     <form id="captureForm" novalidate>
 
-      <div class="field-row">
-        <div class="field">
-          <label for="fname">Primeiro nome <span class="req">*</span></label>
-          <input type="text" id="fname" name="fname" placeholder="Seu nome" required />
-        </div>
-        <div class="field">
-          <label for="lname">Último sobrenome <span class="req">*</span></label>
-          <input type="text" id="lname" name="lname" placeholder="Sobrenome" required />
-        </div>
+      <div class="field">
+        <label for="nome">Nome completo <span class="req">*</span></label>
+        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required />
       </div>
 
       <div class="field">
@@ -1156,18 +1157,17 @@
   document.getElementById('captureForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const fname   = document.getElementById('fname').value.trim();
-    const lname   = document.getElementById('lname').value.trim();
+    const nome    = document.getElementById('nome').value.trim();
     const email   = document.getElementById('email').value.trim();
     const tel     = document.getElementById('telefone').value.trim();
     const unidade = document.getElementById('unidade').value;
 
-    if (!fname || !email || !tel || !unidade) {
+    if (!nome || !email || !tel || !unidade) {
       alert('Por favor, preencha todos os campos obrigatórios.');
       return;
     }
 
-    formData = { nome: fname + ' ' + lname, email, telefone: tel, unidade };
+    formData = { nome, email, telefone: tel, unidade };
 
     fetch('https://script.google.com/macros/s/AKfycbwdtZhJYe00WWhpC_sz-HsVF7Wb92RATn3PB51BuDSwyvhlnfMz5pmY6vnh-9djTM839w/exec', {
       method: 'POST',
