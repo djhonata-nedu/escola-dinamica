@@ -28,25 +28,6 @@
       background: var(--white);
     }
 
-    /* ── HEADER ── */
-    header {
-      background: var(--blue);
-      padding: 14px 40px;
-      display: flex;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
-    }
-
-    .logo-wrap {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      text-decoration: none;
-    }
-
     .logo-img {
       height: 44px;
       width: auto;
@@ -57,6 +38,11 @@
       flex-shrink: 0;
     }
 
+    .hero-logo {
+      display: block;
+      margin: 0 auto 24px;
+    }
+
     /* ── HERO ── */
     .hero {
       background: var(--blue);
@@ -65,13 +51,27 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 80px 24px 0;
+      padding: 64px 24px 0;
+      position: relative;
+    }
+
+    .hero-kv-bg {
+      position: absolute;
+      inset: 0;
+      background-image: url('logo/logo_novo.png');
+      background-repeat: repeat;
+      background-size: 150px auto;
+      opacity: 0.07;
+      pointer-events: none;
+      z-index: 0;
     }
 
     .hero-content {
       max-width: 700px;
       padding-bottom: 72px;
       color: var(--white);
+      position: relative;
+      z-index: 1;
     }
 
     /* ── SECTION TRANSITION ── */
@@ -87,6 +87,8 @@
         #c4a0f5 83.33% 100%
       );
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
     .badge {
@@ -359,7 +361,7 @@
       box-shadow: 0 6px 40px rgba(26,69,192,0.13), 0 1px 6px rgba(0,0,0,0.05);
       overflow: hidden;
       position: sticky;
-      top: 80px;
+      top: 20px;
     }
 
     .form-header {
@@ -824,20 +826,14 @@
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <a href="#" class="logo-wrap">
-    <img src="logo/logo_novo.png" alt="Logo Dinâmica Bilingual School" class="logo-img" loading="lazy" />
-  </a>
-  </a>
-</header>
-
 <!-- HERO -->
 <section class="hero">
+  <div class="hero-kv-bg"></div>
   <div class="hero-content">
+    <img src="logo/logo_novo.png" alt="Logo Dinâmica Bilingual School" class="logo-img hero-logo" loading="lazy" />
     <span class="badge">&#127881; Evento Presencial · Exclusivo</span>
-    <p class="hero-tagline">Dinâmica Baby</p>
     <h1 class="hero-title">Pure Baby Experience</h1>
+    <p class="hero-tagline">Dinâmica Baby</p>
     <p class="hero-subtitle">Uma curadoria de estímulos</p>
     <div class="hero-meta">
       <div class="hero-meta-item">
@@ -967,7 +963,7 @@
       </div>
 
       <div class="field">
-        <label for="unidade">Evento de interesse <span class="req">*</span></label>
+        <label for="unidade">Qual unidade é ideal para a sua família? <span class="req">*</span></label>
         <select id="unidade" name="unidade" required>
           <option value="" disabled selected>Selecione um evento</option>
           <option value="Centro (24/6/2026)">Centro (24/6/2026)</option>
@@ -1064,7 +1060,7 @@
   <div class="popup" id="popup1">
     <span class="popup-emoji">👶</span>
     <h3>Evento exclusivo</h3>
-    <p>Este evento é exclusivo para crianças entre <strong>6 meses e 1 ano e meio</strong>.<br />Seu bebê está nessa faixa?</p>
+    <p>Este evento é exclusivo para crianças entre <strong>04 meses e 01 ano</strong>.<br />Seu bebê está nessa faixa?</p>
     <div class="popup-actions">
       <button class="btn-popup-confirm" id="btnConfirm">Sim, confirmo</button>
       <button class="btn-popup-deny" id="btnDeny">Não</button>
@@ -1085,7 +1081,7 @@
   <!-- 2: Escolha de unidade -->
   <div class="popup" id="popup2" style="display:none">
     <span class="popup-emoji">📍</span>
-    <h3>Que unidade é ideal para você?</h3>
+    <h3>Qual unidade é ideal para a sua família?</h3>
     <p>Escolha a unidade mais conveniente para a sua família.</p>
     <div class="unit-grid">
       <button class="btn-unit" onclick="selectUnit('Centro (24/6/2026)')">Centro <span class="unit-date">24/6/2026</span></button>
@@ -1109,9 +1105,11 @@
 
 <!-- FOOTER -->
 <footer>
-  <strong>Dinâmica Bilingual School</strong><br />
-  Unidade Centro · Rua Alves de Brito, 236 – Florianópolis, SC<br /><br />
-  &copy; 2025 Dinâmica Bilingual School. Todos os direitos reservados.
+  <strong>Dinâmica Bilingual School</strong><br /><br />
+  <strong>Centro:</strong> R. Alves de Brito, 236 – Centro, Florianópolis – SC, 88020-710<br />
+  <strong>Jurerê:</strong> R. Jurerê Tradicional, 103 – Jurerê, Florianópolis – SC, 88054-750<br />
+  <strong>Primavera:</strong> SC-401, 4100 – Saco Grande, Florianópolis – SC, 88032-005<br /><br />
+  &copy; 2026 Dinâmica Bilingual School. Todos os direitos reservados.
 </footer>
 
 <script>
