@@ -67,10 +67,14 @@
 
     .hero-content {
       max-width: 700px;
-      padding-bottom: 72px;
+      padding: 36px 40px 60px;
       color: var(--blue-dark);
       position: relative;
       z-index: 1;
+      background: rgba(255,255,255,0.3);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-radius: 16px;
     }
 
     .section-transition {
@@ -667,7 +671,7 @@
       .main-wrap { grid-template-columns: 1fr; gap: 44px; padding: 48px 20px 60px; }
       .blocks-section { grid-template-columns: 1fr; padding: 0 20px 56px; }
       .form-card { position: static; }
-      .hero-content { padding-bottom: 56px; }
+      .hero-content { padding: 28px 20px 48px; }
       header { padding: 14px 20px; }
       .field-row { grid-template-columns: 1fr; }
     }
