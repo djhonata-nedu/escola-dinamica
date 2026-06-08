@@ -286,7 +286,7 @@
       padding: 32px 28px;
     }
 
-    .block-card.blue-card { background: var(--blue); color: var(--white); }
+    .block-card.blue-card { background: #a6c8f5; color: var(--blue-dark); }
     .block-card.light-card { background: var(--gray-light); }
 
     .block-card h3 {
@@ -297,6 +297,11 @@
       margin-bottom: 20px;
       padding-bottom: 14px;
       border-bottom: 2px solid rgba(255,255,255,0.2);
+    }
+
+    .block-card.blue-card h3 {
+      color: var(--blue-dark);
+      border-bottom-color: rgba(0,0,0,0.12);
     }
 
     .block-card.light-card h3 {
@@ -319,7 +324,7 @@
       line-height: 1.5;
     }
 
-    .blue-card .block-list li { color: rgba(255,255,255,0.9); }
+    .blue-card .block-list li { color: var(--blue-dark); }
     .light-card .block-list li { color: var(--text-muted); }
 
     .block-icon {
@@ -345,12 +350,12 @@
     }
 
     .form-header {
-      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
-      color: var(--white);
+      background: #a6c8f5;
+      color: var(--blue-dark);
       padding: 26px 28px 22px;
     }
 
-    .form-header .section-label { color: var(--yellow); margin-bottom: 6px; }
+    .form-header .section-label { color: var(--blue-dark); margin-bottom: 6px; }
 
     .form-header h3 {
       font-size: 1.15rem;
@@ -358,13 +363,13 @@
       margin-bottom: 4px;
     }
 
-    .form-header p { font-size: 0.8rem; opacity: 0.72; }
+    .form-header p { font-size: 0.8rem; opacity: 0.7; }
 
     .spots-bar {
       display: flex;
       align-items: center;
       gap: 8px;
-      background: rgba(255,255,255,0.1);
+      background: rgba(0,0,0,0.06);
       border-radius: 8px;
       padding: 9px 12px;
       margin-top: 14px;
@@ -646,15 +651,16 @@
 
     /* ── FOOTER ── */
     footer {
-      background: var(--blue-dark);
-      color: rgba(255,255,255,0.65);
+      background: #a6c8f5;
+      color: rgba(15,45,140,0.75);
       text-align: center;
       padding: 36px 24px;
       font-size: 0.8rem;
       line-height: 1.8;
     }
 
-    footer strong { color: var(--white); }
+    footer strong { color: var(--blue-dark); }
+    footer a { color: var(--blue-dark); text-decoration: none; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 860px) {
