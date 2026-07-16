@@ -630,12 +630,12 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     submitBtn.disabled = fora;
   }));
 
-  // Mascara telefone
+  // Mascara telefone (corrigida)
   document.getElementById('tel').addEventListener('input', function () {
-    let v = this.value.replace(/D/g, '').slice(0, 11);
-    if (v.length > 10) v = v.replace(/^(d{2})(d{5})(d{4})$/, '($1) $2-$3');
-    else if (v.length > 6) v = v.replace(/^(d{2})(d{4})(d*)$/, '($1) $2-$3');
-    else if (v.length > 2) v = v.replace(/^(d{2})(d*)$/, '($1) $2');
+    let v = this.value.replace(/\D/g, '').slice(0, 11);
+    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
+    else if (v.length > 2) v = v.replace(/^(\d{2})(\d*)$/, '($1) $2');
     this.value = v;
   });
 
@@ -644,6 +644,34 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     e.preventDefault();
     const form = e.target;
     if (!form.checkValidity()){ form.reportValidity(); return; }
+
+    const nome    = document.getElementById('nome').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const tel     = document.getElementById('tel').value.trim();
+
+    // Validação de e-mail
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+    if (!emailOk) {
+      const el = document.getElementById('email');
+      el.setCustomValidity('Digite um e-mail válido (ex: nome@gmail.com)');
+      el.reportValidity();
+      el.setCustomValidity('');
+      return;
+    }
+
+    // Validação de telefone — mínimo 10 dígitos (DDD + número)
+    const digits = tel.replace(/\D/g, '');
+    if (digits.length < 10) {
+      const el = document.getElementById('tel');
+      el.setCustomValidity('Digite o telefone com DDD — mínimo 10 dígitos');
+      el.reportValidity();
+      el.setCustomValidity('');
+      return;
+    }
+
+        const nome    = document.getElementById('nome').value.trim();
+    const email   = document.getElementById('email').value.trim();
+    const tel     = document.getElementById('tel').value.trim();
 
     const nome    = document.getElementById('nome').value.trim();
     const email   = document.getElementById('email').value.trim();
