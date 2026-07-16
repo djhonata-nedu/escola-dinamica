@@ -732,33 +732,61 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
   document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Campos obrigatórios (HTML5)
-    if (!this.checkValidity()) { this.reportValidity(); return; }
-
     var nome    = document.getElementById('nome').value.trim().replace(/\s{2,}/g, ' ');
     var email   = fixEmail(document.getElementById('email').value);
     document.getElementById('email').value = email;
     var tel     = document.getElementById('tel').value.trim();
-    var unidade = (document.querySelector('input[name="unidade"]:checked') || {}).value || '';
+    var idadeEl = document.querySelector('input[name="idade"]:checked');
+    var unidEl  = document.querySelector('input[name="unidade"]:checked');
 
-    // Valida formato de e-mail
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-      var el = document.getElementById('email');
-      el.setCustomValidity('Digite um e-mail válido (ex: nome@gmail.com)');
-      el.reportValidity();
-      el.setCustomValidity('');
+    // 1. Nome
+    if (!nome) {
+      var elN = document.getElementById('nome');
+      elN.setCustomValidity('Preencha seu nome completo');
+      elN.reportValidity();
+      elN.setCustomValidity('');
       return;
     }
 
-    // Valida telefone — mínimo 10 dígitos
+    // 2. E-mail
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      var elE = document.getElementById('email');
+      elE.setCustomValidity('Digite um e-mail válido (ex: nome@gmail.com)');
+      elE.reportValidity();
+      elE.setCustomValidity('');
+      return;
+    }
+
+    // 3. Telefone
     var telError = document.getElementById('telError');
-    if (tel.replace(/D/g, '').length < 10) {
-      telError.textContent = '⚠ Telefone incompleto — informe DDD + número. Ex: (48) 99999-9999';
+    if (tel.replace(/\D/g, '').length < 10) {
+      telError.textContent   = '⚠ Telefone incompleto — informe DDD + número. Ex: (48) 99999-9999';
       telError.style.display = 'block';
       document.getElementById('tel').focus();
       return;
     }
     telError.style.display = 'none';
+
+    // 4. Idade
+    if (!idadeEl) {
+      var elI = document.querySelector('input[name="idade"]');
+      elI.setCustomValidity('Selecione a idade do seu bebê');
+      elI.reportValidity();
+      elI.setCustomValidity('');
+      return;
+    }
+    if (idadeEl.value === 'fora') return;
+
+    // 5. Unidade
+    if (!unidEl) {
+      var elU = document.querySelector('input[name="unidade"]');
+      elU.setCustomValidity('Selecione a Unidade desejada');
+      elU.reportValidity();
+      elU.setCustomValidity('');
+      return;
+    }
+
+    var unidade = unidEl.value;
 
     // Google Sheets
     fetch('https://script.google.com/macros/s/AKfycbwdtZhJYe00WWhpC_sz-HsVF7Wb92RATn3PB51BuDSwyvhlnfMz5pmY6vnh-9djTM839w/exec', {
@@ -775,7 +803,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     // Confirmação
     document.getElementById('rsvpForm').style.display    = 'none';
     document.getElementById('formSuccess').style.display = 'block';
-  });
+  });;
 </script>
 </body>
 </html>
