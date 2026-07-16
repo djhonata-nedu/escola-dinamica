@@ -608,77 +608,66 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
 </footer>
 
 <script>
-  // Aplica o PAINEL DE TEXTOS aos elementos da página
+  // ── Textos ──────────────────────────────────────────────────────────────
   document.querySelectorAll('[data-t]').forEach(el => {
     const k = el.dataset.t;
     if (TEXTOS[k] !== undefined) el.innerHTML = TEXTOS[k];
   });
 
-  // Reveal on scroll
+  // ── Scroll reveal ────────────────────────────────────────────────────────
   const io = new IntersectionObserver(es => es.forEach(e => {
-    if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-  }), {threshold:.12});
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  }), { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Player (placeholder até o vídeo institucional ser plugado)
-
-  // Age gate inline
-  const ageAlert = document.getElementById('ageAlert');
+  // ── Age gate ─────────────────────────────────────────────────────────────
+  const ageAlert  = document.getElementById('ageAlert');
   const submitBtn = document.getElementById('submitBtn');
-  document.querySelectorAll('input[name="idade"]').forEach(r => r.addEventListener('change', e => {
-    const fora = e.target.value === 'fora';
-    ageAlert.style.display = fora ? 'block' : 'none';
-    submitBtn.disabled = fora;
-  }));
+  document.querySelectorAll('input[name="idade"]').forEach(r => {
+    r.addEventListener('change', function () {
+      const fora = this.value === 'fora';
+      ageAlert.style.display  = fora ? 'block' : 'none';
+      submitBtn.disabled      = fora;
+    });
+  });
 
-  // Auto-correção de e-mail
+  // ── Mapa de correção de domínios de e-mail ────────────────────────────────
   const EMAIL_FIXES = {
-    // Gmail
     'gmai.com':'gmail.com','gmial.com':'gmail.com','gamil.com':'gmail.com',
     'gmali.com':'gmail.com','gmal.com':'gmail.com','gnail.com':'gmail.com',
     'gmaill.com':'gmail.com','gmail.con':'gmail.com','gmail.cmo':'gmail.com',
     'gmail.cm':'gmail.com','gmail.co':'gmail.com','gmail.cpm':'gmail.com',
-    'gmail.ocm':'gmail.com','gmai.com.br':'gmail.com',
-    // Hotmail
+    'gmail.ocm':'gmail.com',
     'hotmai.com':'hotmail.com','hotmal.com':'hotmail.com','hotmial.com':'hotmail.com',
     'hotmali.com':'hotmail.com','homail.com':'hotmail.com','hotmail.con':'hotmail.com',
-    'hotmail.cm':'hotmail.com','hotmail.cmo':'hotmail.com','hotmal.com.br':'hotmail.com',
-    'hotamail.com':'hotmail.com',
-    // Outlook
+    'hotmail.cm':'hotmail.com','hotmail.cmo':'hotmail.com','hotamail.com':'hotmail.com',
     'outlok.com':'outlook.com','outllok.com':'outlook.com','otulook.com':'outlook.com',
     'outlool.com':'outlook.com','outlook.con':'outlook.com','outlook.cm':'outlook.com',
-    // Yahoo
     'yahooo.com':'yahoo.com','yaho.com':'yahoo.com','yhoo.com':'yahoo.com',
     'yahoo.con':'yahoo.com','yahoo.cm':'yahoo.com','yahoo.cmo':'yahoo.com',
-    'yhaoo.com':'yahoo.com','yahooo.com.br':'yahoo.com.br','yaho.com.br':'yahoo.com.br',
-    // iCloud
+    'yhaoo.com':'yahoo.com',
     'iclod.com':'icloud.com','iclould.com':'icloud.com','icloud.con':'icloud.com',
     'icould.com':'icloud.com',
-    // UOL / Terra / Globo (Brasil)
-    'uol.com':'uol.com.br','terra.com':'terra.com.br','globo.com':'globo.com',
-    'ig.com':'ig.com.br','bol.com':'bol.com.br',
   };
 
-  function fixEmail(val) {
-    val = val.trim().toLowerCase();
-    if (!val.includes('@')) return { value: val, fixed: false, hint: '' };
-    const [local, domain] = val.split('@');
-    if (!domain) return { value: val, fixed: false, hint: '' };
-    if (EMAIL_FIXES[domain]) {
-      const corrected = local + '@' + EMAIL_FIXES[domain];
-      return { value: corrected, fixed: true, hint: 'Corrigimos para: ' + corrected };
-    }
-    return { value: val, fixed: false, hint: '' };
+  function fixEmail(raw) {
+    var val = (raw || '').trim().toLowerCase();
+    if (!val.includes('@')) return val;
+    var parts  = val.split('@');
+    var local  = parts[0];
+    var domain = parts.slice(1).join('@');
+    return local + '@' + (EMAIL_FIXES[domain] || domain);
   }
 
-  const emailInput = document.getElementById('email');
-  const emailHint  = document.getElementById('emailHint');
+  // ── Auto-correção ao sair do campo e-mail ────────────────────────────────
+  var emailInput = document.getElementById('email');
+  var emailHint  = document.getElementById('emailHint');
 
   emailInput.addEventListener('blur', function () {
-    const result = fixEmail(this.value);
-    if (result.fixed) {
-      this.value = result.value;
-      emailHint.textContent = '✓ ' + result.hint;
+    var fixed = fixEmail(this.value);
+    if (fixed !== this.value.trim().toLowerCase()) {
+      this.value = fixed;
+      emailHint.textContent = '✓ Corrigimos para: ' + fixed;
       emailHint.style.display = 'block';
     } else {
       emailHint.style.display = 'none';
@@ -690,56 +679,51 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     this.setCustomValidity('');
   });
 
-  // Mascara telefone (corrigida)
+  // ── Máscara de telefone ──────────────────────────────────────────────────
   document.getElementById('tel').addEventListener('input', function () {
-    let v = this.value.replace(/\D/g, '').slice(0, 11);
-    if (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
-    else if (v.length > 6) v = v.replace(/^(\d{2})(\d{4})(\d*)$/, '($1) $2-$3');
-    else if (v.length > 2) v = v.replace(/^(\d{2})(\d*)$/, '($1) $2');
+    var v = this.value.replace(/\D/g, '').slice(0, 11);
+    if      (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
+    else if (v.length > 6)  v = v.replace(/^(\d{2})(\d{4})(\d*)$/,   '($1) $2-$3');
+    else if (v.length > 2)  v = v.replace(/^(\d{2})(\d*)$/,            '($1) $2');
     this.value = v;
   });
 
-  // Submit — Apps Script + Meta Pixel
-  document.getElementById('rsvpForm').addEventListener('submit', e => {
+  // ── Envio do formulário ──────────────────────────────────────────────────
+  document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     e.preventDefault();
-    const form = e.target;
-    if (!form.checkValidity()){ form.reportValidity(); return; }
 
-    const nome    = document.getElementById('nome').value.trim().replace(/\s{2,}/g, ' ');
-    // Garante correção de email antes de validar
-    const _emailRaw = document.getElementById('email').value;
-    const _emailFix = fixEmail(_emailRaw);
-    document.getElementById('email').value = _emailFix.value;
-    const email = _emailFix.value;
-    const tel     = document.getElementById('tel').value.trim();
+    // Campos obrigatórios (HTML5)
+    if (!this.checkValidity()) { this.reportValidity(); return; }
 
-    // Validação de e-mail
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-    if (!emailOk) {
-      const el = document.getElementById('email');
+    var nome    = document.getElementById('nome').value.trim().replace(/\s{2,}/g, ' ');
+    var email   = fixEmail(document.getElementById('email').value);
+    document.getElementById('email').value = email;
+    var tel     = document.getElementById('tel').value.trim();
+    var unidade = (document.querySelector('input[name="unidade"]:checked') || {}).value || '';
+
+    // Valida formato de e-mail
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      var el = document.getElementById('email');
       el.setCustomValidity('Digite um e-mail válido (ex: nome@gmail.com)');
       el.reportValidity();
       el.setCustomValidity('');
       return;
     }
 
-    // Validação de telefone — mínimo 10 dígitos (DDD + número)
-    const digits = tel.replace(/\D/g, '');
-    if (digits.length < 10) {
-      const el = document.getElementById('tel');
-      el.setCustomValidity('Digite o telefone com DDD — mínimo 10 dígitos');
-      el.reportValidity();
-      el.setCustomValidity('');
+    // Valida telefone — mínimo 10 dígitos
+    if (tel.replace(/\D/g, '').length < 10) {
+      var elT = document.getElementById('tel');
+      elT.setCustomValidity('Digite o telefone com DDD — mínimo 10 dígitos');
+      elT.reportValidity();
+      elT.setCustomValidity('');
       return;
     }
-
-    const unidade = (document.querySelector('input[name="unidade"]:checked') || {}).value || '';
 
     // Google Sheets
     fetch('https://script.google.com/macros/s/AKfycbwdtZhJYe00WWhpC_sz-HsVF7Wb92RATn3PB51BuDSwyvhlnfMz5pmY6vnh-9djTM839w/exec', {
       method: 'POST', mode: 'no-cors',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ nome, email, telefone: tel, unidade })
+      body: JSON.stringify({ nome: nome, email: email, telefone: tel, unidade: unidade })
     });
 
     // Meta Pixel
@@ -747,7 +731,8 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     var qMap = { centro: 'QualifiedLead Centro', jurere: 'QualifiedLead Jurere', primavera: 'QualifiedLead Primavera' };
     if (qMap[unidade]) fbq('trackCustom', qMap[unidade]);
 
-    form.style.display = 'none';
+    // Confirmação
+    document.getElementById('rsvpForm').style.display    = 'none';
     document.getElementById('formSuccess').style.display = 'block';
   });
 </script>
