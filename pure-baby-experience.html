@@ -537,6 +537,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
         <div class="field">
           <label for="nome">Nome completo *</label>
           <input type="text" id="nome" name="nome" required autocomplete="name">
+          <div id="nomeError" style="display:none;margin-top:6px;font-size:.8rem;color:#B25008;background:#FFF4E6;border:1px solid #FFDDB8;border-radius:8px;padding:7px 12px;word-break:break-word;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box"></div>
         </div>
         <div class="field">
           <label for="email">E-mail *</label>
@@ -556,6 +557,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
             <label class="radio-pill"><input type="radio" name="idade" value="ok" required><span>Entre 4 meses e 1 ano</span></label>
             <label class="radio-pill"><input type="radio" name="idade" value="fora"><span>Outra idade</span></label>
           </div>
+          <div id="idadeError" style="display:none;margin-top:6px;font-size:.8rem;color:#B25008;background:#FFF4E6;border:1px solid #FFDDB8;border-radius:8px;padding:7px 12px;word-break:break-word;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box"></div>
         </div>
         <div class="age-alert" id="ageAlert" data-t="form.idade.alerta"></div>
 
@@ -566,6 +568,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
             <label class="unit-opt"><input type="radio" name="unidade" value="jurere"><span class="box" data-t="form.unidade.2"></span></label>
             <label class="unit-opt"><input type="radio" name="unidade" value="primavera"><span class="box" data-t="form.unidade.3"></span></label>
           </div>
+          <div id="unidadeError" style="display:none;margin-top:6px;font-size:.8rem;color:#B25008;background:#FFF4E6;border:1px solid #FFDDB8;border-radius:8px;padding:7px 12px;word-break:break-word;overflow-wrap:anywhere;max-width:100%;box-sizing:border-box"></div>
         </div>
 
         <button class="form-submit" type="submit" id="submitBtn" data-t="form.botao"></button>
@@ -728,6 +731,24 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     this.value = v;
   });
 
+  // ── Limpar erros ao interagir ────────────────────────────────────────────
+  document.getElementById('nome').addEventListener('focus', function () {
+    document.getElementById('nomeError').style.display = 'none';
+  });
+  document.getElementById('nome').addEventListener('input', function () {
+    document.getElementById('nomeError').style.display = 'none';
+  });
+  document.querySelectorAll('input[name="idade"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      document.getElementById('idadeError').style.display = 'none';
+    });
+  });
+  document.querySelectorAll('input[name="unidade"]').forEach(function (r) {
+    r.addEventListener('change', function () {
+      document.getElementById('unidadeError').style.display = 'none';
+    });
+  });
+
   // ── Envio do formulário ──────────────────────────────────────────────────
   document.getElementById('rsvpForm').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -741,19 +762,19 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
 
     // 1. Nome
     if (!nome) {
-      var elN = document.getElementById('nome');
-      elN.setCustomValidity('Preencha seu nome completo');
-      elN.reportValidity();
-      elN.setCustomValidity('');
+      var nErr = document.getElementById('nomeError');
+      nErr.textContent   = '⚠ Preencha seu nome completo';
+      nErr.style.display = 'block';
+      document.getElementById('nome').focus();
       return;
     }
 
     // 2. E-mail
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
-      var elE = document.getElementById('email');
-      elE.setCustomValidity('Digite um e-mail válido (ex: nome@gmail.com)');
-      elE.reportValidity();
-      elE.setCustomValidity('');
+      var eErr = document.getElementById('emailError');
+      eErr.textContent   = '⚠ Digite um e-mail válido (ex: nome@gmail.com)';
+      eErr.style.display = 'block';
+      document.getElementById('email').focus();
       return;
     }
 
@@ -769,20 +790,18 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
 
     // 4. Idade
     if (!idadeEl) {
-      var elI = document.querySelector('input[name="idade"]');
-      elI.setCustomValidity('Selecione a idade do seu bebê');
-      elI.reportValidity();
-      elI.setCustomValidity('');
+      var iErr = document.getElementById('idadeError');
+      iErr.textContent   = '⚠ Selecione a faixa de idade do seu bebê';
+      iErr.style.display = 'block';
       return;
     }
     if (idadeEl.value === 'fora') return;
 
     // 5. Unidade
     if (!unidEl) {
-      var elU = document.querySelector('input[name="unidade"]');
-      elU.setCustomValidity('Selecione a Unidade desejada');
-      elU.reportValidity();
-      elU.setCustomValidity('');
+      var uErr = document.getElementById('unidadeError');
+      uErr.textContent   = '⚠ Selecione a Unidade desejada';
+      uErr.style.display = 'block';
       return;
     }
 
