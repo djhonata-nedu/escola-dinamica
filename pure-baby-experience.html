@@ -674,31 +674,11 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     'escola.com.br','edu.br','gov.br','org.br','com.br',
   ];
 
-  emailInput.addEventListener('blur', function () {
-    var emailErr = document.getElementById('emailError');
-    var fixed    = fixEmail(this.value);
-    // Aplica correção automática
-    if (fixed !== (this.value || '').trim().toLowerCase() && fixed.includes('@')) {
-      this.value = fixed;
-      emailHint.textContent   = '✓ Corrigimos para: ' + fixed;
-      emailHint.style.display = 'block';
-      emailErr.style.display  = 'none';
-    } else {
-      emailHint.style.display = 'none';
-      // Verifica domínio desconhecido
-      var val = (this.value || '').trim();
-      if (val.includes('@')) {
-        var dom = val.split('@').pop().toLowerCase();
-        var known = KNOWN_DOMAINS.some(function(d){ return dom === d || dom.endsWith('.' + d); });
-        if (!known && /^[^s@]+.[^s@]{2,}$/.test(dom)) {
-          emailErr.textContent   = '⚠ Verifique o e-mail — o domínio "' + dom + '" não é reconhecido. Tem certeza que está correto?';
-          emailErr.style.display = 'block';
-        } else {
-          emailErr.style.display = 'none';
-        }
-      }
-    }
-  });;
+  emailInput.addEventListener('focus', function () {
+    emailHint.style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
+    this.setCustomValidity('');
+  });
 
   emailInput.addEventListener('input', function () {
     emailHint.style.display = 'none';
@@ -706,7 +686,38 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     this.setCustomValidity('');
   });
 
+  emailInput.addEventListener('blur', function () {
+    var emailErr = document.getElementById('emailError');
+    emailErr.style.display  = 'none';
+    emailHint.style.display = 'none';
+
+    var val = (this.value || '').trim();
+    if (!val) return;
+
+    var fixed = fixEmail(val);
+    if (fixed !== val.toLowerCase()) {
+      this.value = fixed;
+      emailHint.textContent   = '✓ Corrigimos para: ' + fixed;
+      emailHint.style.display = 'block';
+      return;
+    }
+
+    if (val.includes('@')) {
+      var dom   = val.split('@').pop().toLowerCase();
+      var known = KNOWN_DOMAINS.some(function(d) { return dom === d || dom.endsWith('.' + d); });
+      if (!known && dom.includes('.')) {
+        emailErr.textContent   = '⚠ Verifique o e-mail — o domínio "' + dom + '" não é reconhecido. Tem certeza que está correto?';
+        emailErr.style.display = 'block';
+      }
+    }
+  });
+
   // ── Máscara de telefone ──────────────────────────────────────────────────
+  document.getElementById('tel').addEventListener('focus', function () {
+    var err = document.getElementById('telError');
+    if (err) err.style.display = 'none';
+  });
+
   document.getElementById('tel').addEventListener('input', function () {
         var err = document.getElementById('telError');
     if (err) err.style.display = 'none';
