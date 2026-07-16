@@ -542,10 +542,12 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
           <label for="email">E-mail *</label>
           <input type="email" id="email" name="email" required autocomplete="email">
           <div id="emailHint" style="display:none;margin-top:6px;font-size:.8rem;color:#1E4FC2;background:#EAF0FC;border-radius:8px;padding:7px 12px"></div>
+          <div id="emailError" style="display:none;margin-top:6px;font-size:.8rem;color:#B25008;background:#FFF4E6;border:1px solid #FFDDB8;border-radius:8px;padding:7px 12px"></div>
         </div>
         <div class="field">
           <label for="tel">Telefone (WhatsApp) *</label>
           <input type="tel" id="tel" name="telefone" required autocomplete="tel" inputmode="tel">
+          <div id="telError" style="display:none;margin-top:6px;font-size:.8rem;color:#B25008;background:#FFF4E6;border:1px solid #FFDDB8;border-radius:8px;padding:7px 12px"></div>
         </div>
 
         <div class="field">
@@ -663,24 +665,51 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
   var emailInput = document.getElementById('email');
   var emailHint  = document.getElementById('emailHint');
 
+  // Domínios conhecidos (whitelist)
+  var KNOWN_DOMAINS = [
+    'gmail.com','hotmail.com','outlook.com','yahoo.com','yahoo.com.br',
+    'icloud.com','live.com','msn.com','me.com','mac.com',
+    'uol.com.br','terra.com.br','globo.com','ig.com.br','bol.com.br',
+    'hotmail.com.br','outlook.com.br','live.com.br',
+    'escola.com.br','edu.br','gov.br','org.br','com.br',
+  ];
+
   emailInput.addEventListener('blur', function () {
-    var fixed = fixEmail(this.value);
-    if (fixed !== this.value.trim().toLowerCase()) {
+    var emailErr = document.getElementById('emailError');
+    var fixed    = fixEmail(this.value);
+    // Aplica correção automática
+    if (fixed !== (this.value || '').trim().toLowerCase() && fixed.includes('@')) {
       this.value = fixed;
-      emailHint.textContent = '✓ Corrigimos para: ' + fixed;
+      emailHint.textContent   = '✓ Corrigimos para: ' + fixed;
       emailHint.style.display = 'block';
+      emailErr.style.display  = 'none';
     } else {
       emailHint.style.display = 'none';
+      // Verifica domínio desconhecido
+      var val = (this.value || '').trim();
+      if (val.includes('@')) {
+        var dom = val.split('@').pop().toLowerCase();
+        var known = KNOWN_DOMAINS.some(function(d){ return dom === d || dom.endsWith('.' + d); });
+        if (!known && /^[^s@]+.[^s@]{2,}$/.test(dom)) {
+          emailErr.textContent   = '⚠ Verifique o e-mail — o domínio "' + dom + '" não é reconhecido. Tem certeza que está correto?';
+          emailErr.style.display = 'block';
+        } else {
+          emailErr.style.display = 'none';
+        }
+      }
     }
-  });
+  });;
 
   emailInput.addEventListener('input', function () {
     emailHint.style.display = 'none';
+    document.getElementById('emailError').style.display = 'none';
     this.setCustomValidity('');
   });
 
   // ── Máscara de telefone ──────────────────────────────────────────────────
   document.getElementById('tel').addEventListener('input', function () {
+        var err = document.getElementById('telError');
+    if (err) err.style.display = 'none';
     var v = this.value.replace(/\D/g, '').slice(0, 11);
     if      (v.length > 10) v = v.replace(/^(\d{2})(\d{5})(\d{4})$/, '($1) $2-$3');
     else if (v.length > 6)  v = v.replace(/^(\d{2})(\d{4})(\d*)$/,   '($1) $2-$3');
@@ -711,13 +740,14 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     }
 
     // Valida telefone — mínimo 10 dígitos
-    if (tel.replace(/\D/g, '').length < 10) {
-      var elT = document.getElementById('tel');
-      elT.setCustomValidity('Digite o telefone com DDD — mínimo 10 dígitos');
-      elT.reportValidity();
-      elT.setCustomValidity('');
+    var telError = document.getElementById('telError');
+    if (tel.replace(/D/g, '').length < 10) {
+      telError.textContent = '⚠ Telefone incompleto — informe DDD + número. Ex: (48) 99999-9999';
+      telError.style.display = 'block';
+      document.getElementById('tel').focus();
       return;
     }
+    telError.style.display = 'none';
 
     // Google Sheets
     fetch('https://script.google.com/macros/s/AKfycbwdtZhJYe00WWhpC_sz-HsVF7Wb92RATn3PB51BuDSwyvhlnfMz5pmY6vnh-9djTM839w/exec', {
