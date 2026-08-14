@@ -29,9 +29,9 @@ const TEXTOS = {
   "hero.titulo":   "Pure Baby Experience",
   "hero.assinatura": "O futuro começa before words.",
   "hero.lede":     "Uma manhã exclusiva no universo da Dinâmica Baby: uma curadoria de estímulos preparada para você e seu bebê, ao lado de especialistas em primeira infância.",
-  "hero.chip.data":    "11 · 12 de agosto",
+  "hero.chip.data":    "26 ago · 01 set · 16 set",
   "hero.chip.horario": "9h45 às 11h15",
-  "hero.chip.local":   "Jurerê · Primavera",
+  "hero.chip.local":   "Centro · Jurerê · Primavera",
   "hero.cta":      "Garantir minha vaga",
   "hero.cta2":     "Ver a programação ↓",
   "hero.nota":     "<strong>Apenas 6 VAGAS por UNIDADE.</strong> Exclusivo para bebês de 4 meses a 1 ano.",
@@ -53,11 +53,11 @@ const TEXTOS = {
   /* ---------- CARD DE DETALHES ---------- */
   "card.titulo": "Detalhes do evento",
   "card.datas.t": "Datas",
-  "card.datas.v": "11/08 – Jurerê<br>12/08 – Primavera",
+  "card.datas.v": "26/08 – Centro<br>01/09 – Jurerê<br>16/09 – Primavera",
   "card.horario.t": "Horário",
   "card.horario.v": "Das 9h45 às 11h15",
   "card.unidades.t": "Unidades",
-  "card.unidades.v": "Jurerê e Primavera",
+  "card.unidades.v": "Centro, Jurerê e Primavera",
   "card.publico.t": "Para quem",
   "card.publico.v": "Famílias com bebês de 4 meses a 1 ano",
   "card.preco.t": "Investimento",
@@ -109,14 +109,16 @@ const TEXTOS = {
   "form.titulo": "Garanta sua vaga gratuitamente",
   "form.sub":    "Preencha seus dados e confirme presença.",
   "form.idade.alerta": "Este evento é exclusivo para bebês de 4 meses a 1 ano. Mas temos novidades para todas as idades — acompanhe pelo <a href='https://instagram.com/dinamicabilingual' target='_blank' rel='noopener'>nosso Instagram</a>.",
-  "form.unidade.2": "<b>Jurerê</b><small>11/08/2026</small>",
-  "form.unidade.3": "<b>Primavera</b><small>12/08/2026</small>",
+  "form.unidade.1": "<b>Centro</b><small>26/08/2026</small>",
+  "form.unidade.2": "<b>Jurerê</b><small>01/09/2026</small>",
+  "form.unidade.3": "<b>Primavera</b><small>16/09/2026</small>",
   "form.botao":  "Quero garantir minha vaga →",
   "form.lgpd":   "Os dados pessoais coletados serão utilizados para viabilizar a inscrição e para o envio de comunicações de marketing. A Dinâmica realiza o tratamento de dados pessoais de acordo com a Lei Geral de Proteção de Dados Pessoais (Lei nº 13.709/2018) e demais leis aplicáveis.",
   "form.sucesso.titulo": "Inscrição confirmada!",
   "form.sucesso.desc":   "Que alegria ter você com a gente. Em breve você receberá um e-mail com todos os detalhes. Qualquer dúvida, fale com a gente pelo WhatsApp.",
 
   /* ---------- RODAPÉ ---------- */
+  "foot.centro":    "R. Alves de Brito, 236<br>Centro, Florianópolis – SC<br>88020-710",
   "foot.jurere":    "R. Jurerê Tradicional, 103<br>Jurerê, Florianópolis – SC<br>88054-750",
   "foot.primavera": "SC-401, 4100<br>Saco Grande, Florianópolis – SC<br>88032-005",
   "foot.copy":      "© 2026 Dinâmica Bilingual School. Todos os direitos reservados."
@@ -273,7 +275,7 @@ const TEXTOS = {
   .form-success p{color:var(--ink-soft);font-size:.96rem}
 
   footer{background:var(--navy-deep);color:rgba(255,255,255,.78);padding:56px 0 36px;font-size:.9rem}
-  .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:40px;margin-bottom:40px}
+  .foot-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
   .foot-brand{display:flex;align-items:center;gap:12px}
   .foot-brand img{height:46px}
   .foot-brand .fb-name{font-weight:700;color:#fff;font-size:1.05rem;line-height:1.2}
@@ -562,6 +564,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
         <div class="field">
           <label>Qual é a Unidade ideal para a sua família? *</label>
           <div class="unit-grid">
+            <label class="unit-opt"><input type="radio" name="unidade" value="centro" required><span class="box" data-t="form.unidade.1"></span></label>
             <label class="unit-opt"><input type="radio" name="unidade" value="jurere"><span class="box" data-t="form.unidade.2"></span></label>
             <label class="unit-opt"><input type="radio" name="unidade" value="primavera"><span class="box" data-t="form.unidade.3"></span></label>
           </div>
@@ -590,6 +593,10 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
         <div class="fb-name">Dinâmica<small>Bilingual School</small></div>
       </div>
       <div>
+        <h4>Centro</h4>
+        <p data-t="foot.centro"></p>
+      </div>
+      <div>
         <h4>Jurerê</h4>
         <p data-t="foot.jurere"></p>
       </div>
@@ -600,7 +607,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
     </div>
     <div class="foot-bottom">
       <span data-t="foot.copy"></span>
-      <span style="display:flex;flex-wrap:wrap;gap:16px"><a href="https://instagram.com/escoladinamica.jurere" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:none">@escoladinamica.jurere</a><a href="https://instagram.com/escoladinamica.primavera" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:none">@escoladinamica.primavera</a></span>
+      <span style="display:flex;flex-wrap:wrap;gap:16px"><a href="https://instagram.com/escoladinamica.centro" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:none">@escoladinamica.centro</a><a href="https://instagram.com/escoladinamica.jurere" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:none">@escoladinamica.jurere</a><a href="https://instagram.com/escoladinamica.primavera" target="_blank" rel="noopener" style="color:rgba(255,255,255,.6);text-decoration:none">@escoladinamica.primavera</a></span>
     </div>
   </div>
 </footer>
@@ -809,7 +816,7 @@ src='https://www.facebook.com/tr?id=1781901192777442&ev=PageView&noscript=1'/></
 
     // Meta Pixel
     fbq('track', 'Lead', { content_name: unidade });
-    var qMap = { jurere: 'QualifiedLead Jurere', primavera: 'QualifiedLead Primavera' };
+    var qMap = { centro: 'QualifiedLead Centro', jurere: 'QualifiedLead Jurere', primavera: 'QualifiedLead Primavera' };
     if (qMap[unidade]) fbq('trackCustom', qMap[unidade]);
 
     // Confirmação
